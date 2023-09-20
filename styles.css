@@ -2,14 +2,33 @@ body{
     font-family: 'Hubballi', sans-serif;
     margin: 0%;
     padding: 0%;
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+   font-size: 5em;
+   color: #1B2478; 
+}
+
+h2 {
+    
+}
+
+h3{
+    color: #1B2478;
 }
 
 .player-1-aside {
+    width: 20%;
+    background-image: linear-gradient(to right, #EDF171, #F1A8E4);
 
 }
 
 .player-container {
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .player-token {
@@ -21,11 +40,17 @@ body{
 }
 
 .main {
-    
-}
+  display: flex;
+  width: 60%;
+  height: 100vh;
+  flex-direction: column;
+  background-image: linear-gradient(to right, #F1A8E4 , #EDF171, #F1A8E4);
+}  
 
-.game-banner {
 
+header {
+    display: flex;
+    justify-content: center;
 }
 
 .gameboard-container {
@@ -37,6 +62,8 @@ body{
 }
 
 .player-2-aside {
+    width: 20%;
+    background-image: linear-gradient(to right, #F1A8E4 ,#EDF171);
 
 }
 
