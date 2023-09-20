@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Hubballi&display=swap');
+    </style>
+</head>
+<body>
+    <aside class="player-1-aside">
+        <section class="player-container">
+            <h2 class="player-token" id="player1Token">🐁</h2>
+            <h3 class="player-wins" id="player1Wins">`${}`Wins</h3>
+        </section>
+    </aside>
+    <main class="main">
+        <header class="Game-banner">
+            <h1 class="game-state">It's a draw!</h1>
+        </header>
+        <section class="gameboard-container">
+            <div id="gameboard">
+                <div class="box" id="0"></div>
+                <div class="box" id="1"></div>
+                <div class="box" id="2"></div>
+                <div class="box" id="3"></div>
+                <div class="box" id="4"></div>
+                <div class="box" id="5"></div>
+                <div class="box" id="6"></div>
+                <div class="box" id="7"></div>
+                <div class="box" id="8"></div>
+            </div>     
+        </section>
+    </main>
+    <aside class="player-2-aside">
+        <section class="player-container">
+            <h2 class="player-token" id="player2Token">🐈‍⬛</h2>
+            <h3 class="player-wins" id="player2Wins">`${}` Wins</h3>
+        </section>
+    </aside>
+    <script type="text/javascript" src="./main.js"></script>
+</body>
+</html>
