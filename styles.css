@@ -56,7 +56,6 @@ header {
 }
 
 .gameboard-container {
-    border: 2px solid red;
     width: 600px;
     height: 600px;
     display: flex;
@@ -66,7 +65,6 @@ header {
 }
 
 #gameboard {
-    border: solid blueviolet 2px;
     display: flex;
     align-content: center;
     justify-content: center;
