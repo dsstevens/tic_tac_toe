@@ -12,11 +12,12 @@ h1 {
 }
 
 h2 {
-    
+    font-size: 4em;
 }
 
 h3{
     color: #1B2478;
+    font-size: 3em;
 }
 
 .player-1-aside {
@@ -45,8 +46,8 @@ h3{
   height: 100vh;
   flex-direction: column;
   background-image: linear-gradient(to right, #F1A8E4 , #EDF171, #F1A8E4);
+  align-items: center;
 }  
-
 
 header {
     display: flex;
@@ -54,11 +55,32 @@ header {
 }
 
 .gameboard-container {
+    border: 2px solid red;
+    width: 702px;
+    height: 702px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
 
+.box {
+    display: flex;
+    height: 234px;
+    width: 234px;
+    color: #1B2478;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    flex-wrap: wrap;
 }
 
 #gameboard {
-
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .player-2-aside {
