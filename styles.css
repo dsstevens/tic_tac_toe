@@ -1,3 +1,101 @@
-*{
+body{
     font-family: 'Hubballi', sans-serif;
+    margin: 0%;
+    padding: 0%;
+    display: flex;
+    justify-content: center;
 }
+
+h1 {
+   font-size: 5em;
+   color: #1B2478; 
+}
+
+h2 {
+    font-size: 4em;
+}
+
+h3{
+    color: #1B2478;
+    font-size: 3em;
+}
+
+.player-1-aside {
+    width: 20%;
+    background-image: linear-gradient(to right, #EDF171, #F1A8E4);
+
+}
+
+.player-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-token {
+
+}
+
+.player-wins {
+
+}
+
+.main {
+  display: flex;
+  width: 60%;
+  height: 100vh;
+  flex-direction: column;
+  background-image: linear-gradient(to right, #F1A8E4 , #EDF171, #F1A8E4);
+  align-items: center;
+  border: solid green 2px;
+}  
+
+header {
+    display: flex;
+    justify-content: center;
+}
+
+.gameboard-container {
+    width: 600px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+#gameboard {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 600px;
+    height: 600px;
+}
+
+.box {
+    display: flex;
+    height: 150px;
+    width: 150px;
+    color: #1B2478;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+    flex-wrap: wrap;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+.box:nth-child(3n) {
+    border-right: none;
+}
+
+.box:nth-child(6) ~ .box {
+    border-bottom: none;
+}
+
+
+.player-2-aside {
+    width: 20%;
+    background-image: linear-gradient(to right, #F1A8E4 ,#EDF171);
+
+}
+
