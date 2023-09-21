@@ -64,7 +64,7 @@ header {
     justify-content: center;
 }
 
-#gameboard {
+.gameboard {
     display: flex;
     align-content: center;
     justify-content: center;
