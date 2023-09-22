@@ -32,14 +32,6 @@ h3{
     align-items: center;
 }
 
-.player-token {
-
-}
-
-.player-wins {
-
-}
-
 .main {
   display: flex;
   width: 60%;
@@ -47,7 +39,7 @@ h3{
   flex-direction: column;
   background-image: linear-gradient(to right, #F1A8E4 , #EDF171, #F1A8E4);
   align-items: center;
-  border: solid green 2px;
+  /* border: solid green 2px; */
 }  
 
 header {
@@ -91,7 +83,6 @@ header {
 .box:nth-child(6) ~ .box {
     border-bottom: none;
 }
-
 
 .player-2-aside {
     width: 20%;
