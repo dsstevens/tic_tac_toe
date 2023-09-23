@@ -6,35 +6,48 @@ var player2Wins = document.querySelector(".player2Wins")
 
 //Event Listeners
 gameBoard.addEventListener("click", function())
-window.addEventListener("load", function()
-//initiate game data, check or change
-)
+window.addEventListener("load", resetGame))
 
 // data Model
 var currentPlayer
-
-var player1
-var player2
+//var player1
+//var player2
 
 var winningCombos = {
-    a: [0, 1, 2],
-	b: [3, 4, 5],
-	c: [6, 7, 8],
-	d: [0, 3, 6],
-	e: [1, 4, 7],
-	f: [2, 5, 8],
-	g: [0, 4, 8],
-	h: [2, 4, 6],
+    a: ["ADG"],
+	b: ["BD"],
+	c: ["CDH"],
+	d: ["AE"],
+	e: ["BEGH"],
+	f: ["CE"],
+	g: ["AFH"],
+	h: ["BF"],
+    i: ["CFG"]
 };
 var gameData = {
     // hold the player data w the player inside as its own object, the game data, the current state,
+    player1: {
+        id: id,
+        token: 🐁,
+        currentTurn: boolean,
+        wins: numWins,
+        squares: squares
+    },
+    player2: {
+        id: id,
+        token: 🐈‍⬛,
+        currentTurn: boolean,
+        wins: numWins,
+        squares: squares
+    },
+    player1Squares: [], // will have new square objects w ids and winning combos, iterate over this array does this have 3 objects that all have a
+    player2Squares: [], // what if this is a string instead and everytime a player selects a square, the letter is tacked on the end of the string
     
-    var player1Squares = [],
-    var player2Squares = []
     
 }
+/*
 
-
+*/
 
 //A function that creates the objects that store each players’ information - properties should include: id (ex: 'one'), token (ex: '⭐️'), wins (ex: 0)
 
@@ -57,33 +70,45 @@ function increaseWins(player){
 function trackGameboard(){
     //which squares are empty, which have been clicked and have an icon on it
     //should each square be an object with properties like clicked
+    //could the squares have a property like null and check for null
 }
 
 //A function that keeps track of which player’s turn it currently is
-function turnPlayer(){
+function switchPlayer(){
     // if statement for passing the turn based on who current player is
     // should current player be redefined within the scope of the function or globally?
     // should i define player 1 and 2 as variables or strings?
     if (currentPlayer === player1) {
-        currentPlayer === player2
+        currentPlayer = player2
     } else {
-        currentPlayer === player1
+        currentPlayer = player1
     }
 }
 
 //A function that checks the game board data for win conditions
 function checkForWin(){
-    
+    //compare the current occupied squares to winning combos
+    // square object could contain boolean for clicked, id number, held the win conditions it's a part of
+    //win conditions rep by letters of the combo that the square is a part of 
+    //call resetGame
 }
 
 //A function that detects when a game is a draw (no one has won)
 function checkForDraw(){
-    
+    //compare current occupied squares to winning combos 
+    //specifically compare the player's squares
+    // if no winning combos and no empty squares
+    //call checkForWin
+    //call switchPlayer
+    //call resetGame
 }
 
 //A function that resets the game board’s data to begin a new game
 function resetGame(){
-    
+    // be used as the eventhandler for the window load 
+    //also used after a draw or win
+    //reset all complex vars as empty or null
+    //***alternate player 1 or player 2: call in switchPlayer ?
 }
 
 /*
@@ -96,11 +121,13 @@ var gameData = [{id= "", player: 1}, {id='', player: 2}]
 Q's to consider:
 how is each square represented: single object or within context of a larger complex data type
 has a winning pattern been selected
-keep track of selected square
-how do you represent a win?
+keep track of selected square: id
+how do you represent a win?: winning combo
 pros and cons to how to represent each square: as a div or as a button
 the id property should tell you which square you are to define positions
 consider the path of win and label the squares for that potential
+when to use a return; pure functions need a return
+wins persist over multiple games
 
 options for game data:
 global var for current player, which can be changed and determines the turn
