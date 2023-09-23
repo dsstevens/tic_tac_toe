@@ -10,32 +10,42 @@ window.addEventListener("load", resetGame))
 
 // data Model
 var currentPlayer
-//var player1
-//var player2
+var player1
+var player2
+var playerWinCombos = {
+    A: 0,
+    B: 0,
+    C: 0,
+    D: 0,
+    E: 0,
+    F: 0,
+    G: 0,
+    H: 0
+}
 
 var winningCombos = {
-    a: ["ADG"],
-	b: ["BD"],
-	c: ["CDH"],
-	d: ["AE"],
-	e: ["BEGH"],
-	f: ["CE"],
-	g: ["AFH"],
-	h: ["BF"],
-    i: ["CFG"]
+    one: ["ADG"],
+	two: ["BD"],
+	three: ["CDH"],
+	four: ["AE"],
+	five: ["BEGH"],
+	six: ["CE"],
+	seven: ["AFH"],
+	eight: ["BF"],
+    nine: ["CFG"]
 };
 var gameData = {
     // hold the player data w the player inside as its own object, the game data, the current state
     player1: {
         id: id,
-        token: 🐁,
+        token: "🐁",
         currentTurn: boolean,
         wins: numWins,
         squares: squares
     },
     player2: {
         id: id,
-        token: 🐈‍⬛,
+        token: "🐈‍⬛",
         currentTurn: boolean,
         wins: numWins,
         squares: squares
@@ -58,6 +68,13 @@ function createPlayer(id, token, boolean, numWins, squares){
         squares: squares
     }
     return player
+}
+
+function playSquare(squareIdString){
+    idArray = squareIdString.split("")
+    for (var = i; i <idArray.length; i++){
+        playerWinCombos
+    }
 }
 
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
