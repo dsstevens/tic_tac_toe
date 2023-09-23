@@ -25,7 +25,7 @@ var winningCombos = {
     i: ["CFG"]
 };
 var gameData = {
-    // hold the player data w the player inside as its own object, the game data, the current state,
+    // hold the player data w the player inside as its own object, the game data, the current state
     player1: {
         id: id,
         token: 🐁,
@@ -42,8 +42,6 @@ var gameData = {
     },
     player1Squares: [], // will have new square objects w ids and winning combos, iterate over this array does this have 3 objects that all have a
     player2Squares: [], // what if this is a string instead and everytime a player selects a square, the letter is tacked on the end of the string
-    
-    
 }
 /*
 
@@ -52,13 +50,14 @@ var gameData = {
 //A function that creates the objects that store each players’ information - properties should include: id (ex: 'one'), token (ex: '⭐️'), wins (ex: 0)
 
 function createPlayer(id, token, boolean, numWins, squares){
-    return player {
+    var player = {
         id: id,
         token: token,
         currentTurn: boolean,
         wins: numWins,
         squares: squares
     }
+    return player
 }
 
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
@@ -75,9 +74,9 @@ function trackGameboard(){
 
 //A function that keeps track of which player’s turn it currently is
 function switchPlayer(){
-    // if statement for passing the turn based on who current player is
     // should current player be redefined within the scope of the function or globally?
     // should i define player 1 and 2 as variables or strings?
+    // currently calling in the player within the game data model
     if (currentPlayer === player1) {
         currentPlayer = player2
     } else {
@@ -131,7 +130,7 @@ wins persist over multiple games
 
 options for game data:
 global var for current player, which can be changed and determines the turn
-if currentplayer is player 1 put the data in either of the two arrays of player one squares and player 2 suares arrays
+if currentplayer is player 1 put the data in either of the two arrays of player one squares and player 2 squares arrays
 the game data could be an array which has objects
 use disable attribute on the clicked square
 
