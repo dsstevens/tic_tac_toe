@@ -5,7 +5,7 @@ var gameBoard = document.querySelector(".gameboard")
 var player2Wins = document.querySelector(".player2Wins")
 
 //Event Listeners
-window.addEventListener("load", resetGame)
+window.addEventListener("load", randomizeTurn(gameData))
 gameBoard.addEventListener("click", )
 
 // data Model
@@ -36,14 +36,14 @@ var winningCombos = {
 };
 var gameData = [
     // hold the player data w the player inside as its own object, the game data, the current state
-    player1: {
+    player1 = {
         id: id,
         token: "🐁",
         currentTurn: boolean,
         wins: numWins,
         squares: []
     },
-    player2: {
+    player2 = {
         id: id,
         token: "🐈‍⬛",
         currentTurn: boolean,
@@ -54,13 +54,18 @@ var gameData = [
    // what if this is a string instead and everytime a player selects a square, the letter is tacked on the end of the string
 ]
 
-var alternatePlayers = 1
+function randomizeTurn(array) {
+    return Math.floor(Math.random()* array.length)
+}
+
 function alternateRounds() {
-    if (alternatePlayers === 1){
-        alternatePlayers = 2
-    } else {
-        alternatePlayers = 1
+ for (var i = 0; i <gameData.length; i++){
+    if (gameData[i].currentTurn === true){
+        gameData[i].currentTurn = false
+    } else if (gameData[i].currentTurn === false) {
+        gameData[i].currentTurn = true
     }
+ }
 }
 
 //A function that creates the objects that store each players’ information - properties should include: id (ex: 'one'), token (ex: '⭐️'), wins (ex: 0)
@@ -89,21 +94,22 @@ function resetGame(){
         H: 0
     },
     gameData = [
-        player1: {
+        player1 = {
             id: id,
             token: "🐁",
             currentTurn: boolean,
             wins: numWins,
             squares: []
         },
-        player2: {
+        player2 = {
             id: id,
             token: "🐈‍⬛",
             currentTurn: boolean,
             wins: numWins,
             squares: []
         },
-    ]
+    ],
+    //alternateRounds() or randomize function to start the game?
 }
 
 function playSquare(squareIdString){
@@ -228,5 +234,13 @@ var gameData = {
     },
     player1Squares: [], // will have new square objects w ids and winning combos, iterate over this array does this have 3 objects that all have a
     player2Squares: [], // what if this is a string instead and everytime a player selects a square, the letter is tacked on the end of the string
+}
+var alternatePlayers = 1
+function alternateRounds() {
+    if (alternatePlayers === 1){
+        alternatePlayers = 2
+    } else {
+        alternatePlayers = 1
+    }
 }
 */
