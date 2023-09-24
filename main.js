@@ -8,22 +8,9 @@ var player2Wins = document.querySelector(".player2Wins")
 window.addEventListener("load", showGamePlay)
 gameBoard.addEventListener("click",function(event){
     event.preventDefault()
-
-
 })
 
 // data Model
-var winningCombos = {
-    one: ["ADG"],
-	two: ["BD"],
-	three: ["CDH"],
-	four: ["AE"],
-	five: ["BEGH"],
-	six: ["CE"],
-	seven: ["AFH"],
-	eight: ["BF"],
-    nine: ["CFG"]
-};
 var gameData = {
     // hold the player data w the player inside as its own object, the game data, the current state
     player1: {
@@ -66,7 +53,7 @@ var gameData = {
 
 // var player1 
 // var player2 
-var currentPlayer 
+var currentPlayer //reassign current player within function
 
 //A function that creates the objects that store each players’ information - properties should include: id (ex: 'one'), token (ex: '⭐️'), wins (ex: 0)
 
@@ -76,22 +63,20 @@ function createPlayer(id, token, boolean, numWins, squares){
         token: token,
         currentTurn: boolean,
         wins: numWins,
-        squares: squares
+        squares: squares,
+        currentCombos: {
+            A: 0,
+            B: 0,
+            C: 0,
+            D: 0,
+            E: 0,
+            F: 0,
+            G: 0,
+            H: 0
+        }
     }
     return player
 }
-
-function alternateRounds() {
-    for (var i = 0; i < gameData.length; i++){
-        if (gameData[i].currentTurn === true){
-            gameData[i].currentTurn = false
-        } else if (gameData[i].currentTurn === false) {
-            gameData[i].currentTurn = true
-    }
- }
-}
-
-
 function showGamePlay(){
     //connect the players in game data to the event listener to initiate game play
     //currently player 1
@@ -102,7 +87,6 @@ function showGamePlay(){
 
 //A function that resets the game board’s data to begin a new game
 function resetGame(){
-    //***alternate player 1 or player 2: call in switchPlayer ?
     playerWinCombos = {
         A: 0,
         B: 0,
@@ -113,14 +97,13 @@ function resetGame(){
         G: 0,
         H: 0
     },
-    //reset the turn of the player
-    alternateRounds() 
+    //reset the turn of the round with a new function ---> alternateRounds() 
 };
 
 function playSquare(squareIdString, player){
     idArray = squareIdString.split("")
     for (var i = 0; i < idArray.length; i++){
-        player[playerTurn][idarray[i]] += 1
+        player[playerTurn][idArray[i]] += 1
     } //access the player 1 and player 2 nested data within the objects
 }
 
@@ -168,11 +151,20 @@ function checkForDraw(){
     //call resetGame
 }
 
-
 /*
 ----> look at the hobbit test
 ----> create 2 player objects to update
 
+var winningCombos = {
+    one: ["ADG","BD","CDH"],
+    two: ["AE","BEGH","CE"],
+    three: ["AFH","BF","CFG"],
+    four: ["ADG","AE","AFH"],
+    five: ["BD","BEGH","BF"],
+    six: ["CDH","CE","CFG"],
+    seven: ["ADG","BEGH","CFG"],
+    eight: ["CDH","BEGH","AFH"],
+};
 hold player 1 and player 2’s data
 var gameData = [{id= "", player: 1}, {id='', player: 2}]
 
@@ -240,7 +232,6 @@ var gameData = {
     player1Squares: [], // will have new square objects w ids and winning combos, iterate over this array does this have 3 objects that all have a
     player2Squares: [], // what if this is a string instead and everytime a player selects a square, the letter is tacked on the end of the string
 }
-var alternatePlayers = 1
 function alternateRounds() {
     if (alternatePlayers === 1){
         alternatePlayers = 2
@@ -252,4 +243,15 @@ function randomizeTurn(gameData) {
     var randomIndex = Math.floor(Math.random()* gameData.length)
     return gameData[randomIndex]
 }
+function alternateRounds() {
+    for (var i = 0; i < gameData.length; i++){
+        if (gameData[i].currentTurn === true){
+            gameData[i].currentTurn = false
+        } else if (gameData[i].currentTurn === false) {
+            gameData[i].currentTurn = true
+    }
+ }
+}
+
+var alternatePlayers = 1
 */
