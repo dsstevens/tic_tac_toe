@@ -53,9 +53,16 @@ var gameData = {
     player1Squares: [], // will have new square objects w ids and winning combos, iterate over this array does this have 3 objects that all have a
     player2Squares: [], // what if this is a string instead and everytime a player selects a square, the letter is tacked on the end of the string
 }
-/*
 
-*/
+var alternatePlayers = 1
+
+function alternateRounds() {
+    if (alternatePlayers === 1){
+        alternatePlayers = 2
+    } else {
+        alternatePlayers = 1
+    }
+}
 
 //A function that creates the objects that store each players’ information - properties should include: id (ex: 'one'), token (ex: '⭐️'), wins (ex: 0)
 
@@ -112,7 +119,9 @@ function checkForWin(){
 //A function that detects when a game is a draw (no one has won)
 function checkForDraw(){
     //compare current occupied squares to winning combos 
-    //specifically compare the player's squares
+    //specifically compare the player's squares based on ids of the playerone squares
+    //iterate over object w Object.keys(playerWinCombos)
+    //if (newArray[i] === 3) {there was a win, add in to player one object to update dm and dom}
     // if no winning combos and no empty squares
     //call checkForWin
     //call switchPlayer
@@ -144,6 +153,7 @@ the id property should tell you which square you are to define positions
 consider the path of win and label the squares for that potential
 when to use a return; pure functions need a return
 wins persist over multiple games
+create a comparison function for the winning combos??? invoke in checkfordraw and checkforwin
 
 options for game data:
 global var for current player, which can be changed and determines the turn
