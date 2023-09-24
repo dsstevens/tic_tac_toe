@@ -11,6 +11,7 @@ gameBoard.addEventListener("click",function(event){
     playSquare(event.target.id,currentPlayer.id)
     console.log('most recent event--->', event.target)
     updateSquareDOM(event, currentPlayer.token)
+    switchPlayer()
 })
 
 // data Model
@@ -112,10 +113,16 @@ function playSquare(squareIdString, player){
 }
 
 function updateSquareDOM(event,token) {
-    //square that just got clicked
     event.target.innerHTML += token
 }
 
+function switchPlayer(){
+    if (currentPlayer.id === 'player1') {
+        currentPlayer = gameData['player2']
+    } else {
+        currentPlayer.id = gameData['player1']
+    }
+}
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
 function increaseWins(player){
     return player.wins +=1
@@ -129,16 +136,6 @@ function trackGameboard(){
 }
 
 //A function that keeps track of which player’s turn it currently is
-function switchPlayer(){
-    // should current player be redefined within the scope of the function or globally?
-    // should i define player 1 and 2 as variables or strings?
-    // currently calling in the player within the game data model
-    if (currentPlayer === player1) {
-        currentPlayer = player2
-    } else {
-        currentPlayer = player1
-    }
-}
 
 //A function that checks the game board data for win conditions
 function checkForWin(){
