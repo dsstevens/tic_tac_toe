@@ -37,17 +37,17 @@ var winningCombos = {
 var gameData = [
     // hold the player data w the player inside as its own object, the game data, the current state
     player1 = {
-        id: id,
+        id: 1,
         token: "🐁",
-        currentTurn: boolean,
-        wins: numWins,
+        currentTurn: false,
+        wins: 0,
         squares: []
     },
     player2 = {
-        id: id,
+        id: 2,
         token: "🐈‍⬛",
-        currentTurn: boolean,
-        wins: numWins,
+        currentTurn: false,
+        wins: 0,
         squares: []
     },
    // will have new square objects w ids and winning combos, iterate over this array does this have 3 objects that all have a
@@ -96,17 +96,17 @@ function resetGame(){
     },
     gameData = [
         player1 = {
-            id: id,
+            id: 1,
             token: "🐁",
-            currentTurn: boolean,
-            wins: numWins,
+            currentTurn: false,
+            wins: 0,
             squares: []
         },
         player2 = {
-            id: id,
+            id: 2,
             token: "🐈‍⬛",
-            currentTurn: boolean,
-            wins: numWins,
+            currentTurn: false,
+            wins: 0,
             squares: []
         },
     ],
