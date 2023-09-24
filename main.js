@@ -54,8 +54,9 @@ var gameData = [
    // what if this is a string instead and everytime a player selects a square, the letter is tacked on the end of the string
 ]
 
-function randomizeTurn(array) {
-    return Math.floor(Math.random()* array.length)
+function randomizeTurn(gameData) {
+    var randomIndex = Math.floor(Math.random()* gameData.length)
+    return gameData[randomIndex]
 }
 
 function alternateRounds() {
@@ -109,8 +110,8 @@ function resetGame(){
             squares: []
         },
     ],
-    //alternateRounds() or randomize function to start the game?
-}
+    alternateRounds() 
+};
 
 function playSquare(squareIdString){
     idArray = squareIdString.split("")
