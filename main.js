@@ -5,7 +5,7 @@ var gameBoard = document.querySelector(".gameboard")
 var player2Wins = document.querySelector(".player2Wins")
 
 //Event Listeners
-window.addEventListener("load", )
+window.addEventListener("load", showFirstTurn)
 gameBoard.addEventListener("click", )
 
 // data Model
@@ -54,17 +54,13 @@ var gameData = [
    // what if this is a string instead and everytime a player selects a square, the letter is tacked on the end of the string
 ]
 
-function randomizeTurn(gameData) {
-    var randomIndex = Math.floor(Math.random()* gameData.length)
-    return gameData[randomIndex]
-}
 
 function alternateRounds() {
- for (var i = 0; i <gameData.length; i++){
-    if (gameData[i].currentTurn === true){
-        gameData[i].currentTurn = false
-    } else if (gameData[i].currentTurn === false) {
-        gameData[i].currentTurn = true
+    for (var i = 0; i <gameData.length; i++){
+        if (gameData[i].currentTurn === true){
+            gameData[i].currentTurn = false
+        } else if (gameData[i].currentTurn === false) {
+            gameData[i].currentTurn = true
     }
  }
 }
@@ -197,16 +193,16 @@ GAMEPLAY IN DATA MODEL::::
 // on load: initiate game data. check or change
 *** each round of play needs to alternate which player goes first
 // on click: define the square for player one, 
-    disable for being clicked again, 
-    push to player's array of squares
+disable for being clicked again, 
+push to player's array of squares
 // use event.target.id within the eventhandler function to compare the id and do an action
 // check boolean if it's already clicked
 // if clicked - do nothing
 
 // if not clicked
-    claim square ID for current player - push into data model
-    push the id into array of current occupied squares for the player
-    consider that the id of the square is related to the winning combos
+claim square ID for current player - push into data model
+push the id into array of current occupied squares for the player
+consider that the id of the square is related to the winning combos
 // change squares boolean property to clicked
 // check for draw - if yes -> reset game DM - clear current occupied squares
 // check for win - based on current player  ->  if yes update DM  -> reset game DM
@@ -243,5 +239,9 @@ function alternateRounds() {
     } else {
         alternatePlayers = 1
     }
+}
+function randomizeTurn(gameData) {
+    var randomIndex = Math.floor(Math.random()* gameData.length)
+    return gameData[randomIndex]
 }
 */
