@@ -5,13 +5,13 @@ var gameBoard = document.querySelector(".gameboard")
 var player2Wins = document.querySelector(".player2Wins")
 
 //Event Listeners
-window.addEventListener("load", randomizeTurn(gameData))
+window.addEventListener("load", )
 gameBoard.addEventListener("click", )
 
 // data Model
-var currentPlayer
-var player1
-var player2
+var player1 = gameData.player1
+var player2 = gameData.player2
+var currentPlayer = player1
 var playerWinCombos = {
     A: 0,
     B: 0,
