@@ -8,7 +8,9 @@ var player2Wins = document.querySelector(".player2Wins")
 window.addEventListener("load", showGamePlay)
 gameBoard.addEventListener("click",function(event){
     event.preventDefault()
-    playSquare(event.target.id,currentPlayer)
+    playSquare(event.target.id,currentPlayer.id)
+    console.log('most recent event--->', event.target)
+    updateSquareDOM(event, currentPlayer.token)
 })
 
 // data Model
@@ -82,32 +84,37 @@ function showGamePlay(){
     //connect the players in game data to the event listener to initiate game play
     //currently player 1
     // update dom with innerHTML for the first player's turn
-    currentPlayer = gameData[player1]
+    currentPlayer = gameData['player1']
     gameState.innerHTML = `It's ${gameData.player1.token}'s Turn!`
 }
 
 //A function that resets the game board’s data to begin a new game
-function resetGame(){
-    player.currentCombos = {
-        A: 0,
-        B: 0,
-        C: 0,
-        D: 0,
-        E: 0,
-        F: 0,
-        G: 0,
-        H: 0
-    },
-    //reset the turn of the round with a new function ---> alternateRounds() 
-}
+// function resetGame(){
+//     player.currentCombos = {
+//         A: 0,
+//         B: 0,
+//         C: 0,
+//         D: 0,
+//         E: 0,
+//         F: 0,
+//         G: 0,
+//         H: 0
+//     },
+//     //reset the turn of the round with a new function ---> alternateRounds() 
+// }
 
 function playSquare(squareIdString, player){
     idArray = squareIdString.split("")
     for (var i = 0; i < idArray.length; i++){
        gameData[player].currentCombos[idArray[i]] += 1
     } //access the player 1 and player 2 nested data within the objects
+    console.log(currentPlayer)
 }
 
+function updateSquareDOM(event,token) {
+    //square that just got clicked
+    event.target.innerHTML += token
+}
 
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
 function increaseWins(player){
