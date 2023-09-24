@@ -5,8 +5,8 @@ var gameBoard = document.querySelector(".gameboard")
 var player2Wins = document.querySelector(".player2Wins")
 
 //Event Listeners
-gameBoard.addEventListener("click", function())
-window.addEventListener("load", resetGame))
+window.addEventListener("load", resetGame)
+gameBoard.addEventListener("click", )
 
 // data Model
 var currentPlayer
@@ -34,28 +34,27 @@ var winningCombos = {
 	eight: ["BF"],
     nine: ["CFG"]
 };
-var gameData = {
+var gameData = [
     // hold the player data w the player inside as its own object, the game data, the current state
     player1: {
         id: id,
         token: "🐁",
         currentTurn: boolean,
         wins: numWins,
-        squares: squares
+        squares: []
     },
     player2: {
         id: id,
         token: "🐈‍⬛",
         currentTurn: boolean,
         wins: numWins,
-        squares: squares
+        squares: []
     },
-    player1Squares: [], // will have new square objects w ids and winning combos, iterate over this array does this have 3 objects that all have a
-    player2Squares: [], // what if this is a string instead and everytime a player selects a square, the letter is tacked on the end of the string
-}
+   // will have new square objects w ids and winning combos, iterate over this array does this have 3 objects that all have a
+   // what if this is a string instead and everytime a player selects a square, the letter is tacked on the end of the string
+]
 
 var alternatePlayers = 1
-
 function alternateRounds() {
     if (alternatePlayers === 1){
         alternatePlayers = 2
@@ -76,10 +75,40 @@ function createPlayer(id, token, boolean, numWins, squares){
     }
     return player
 }
+//A function that resets the game board’s data to begin a new game
+function resetGame(){
+    //***alternate player 1 or player 2: call in switchPlayer ?
+    playerWinCombos = {
+        A: 0,
+        B: 0,
+        C: 0,
+        D: 0,
+        E: 0,
+        F: 0,
+        G: 0,
+        H: 0
+    },
+    gameData = [
+        player1: {
+            id: id,
+            token: "🐁",
+            currentTurn: boolean,
+            wins: numWins,
+            squares: []
+        },
+        player2: {
+            id: id,
+            token: "🐈‍⬛",
+            currentTurn: boolean,
+            wins: numWins,
+            squares: []
+        },
+    ]
+}
 
 function playSquare(squareIdString){
     idArray = squareIdString.split("")
-    for (var = i; i <idArray.length; i++){
+    for (var i = 0; i < idArray.length; i++){
         playerWinCombos
     }
 }
@@ -128,13 +157,6 @@ function checkForDraw(){
     //call resetGame
 }
 
-//A function that resets the game board’s data to begin a new game
-function resetGame(){
-    // be used as the eventhandler for the window load 
-    //also used after a draw or win
-    //reset all complex vars as empty or null
-    //***alternate player 1 or player 2: call in switchPlayer ?
-}
 
 /*
 ----> look at the hobbit test
@@ -187,4 +209,24 @@ GAMEPLAY IN DATA MODEL::::
 // if not clicked - update to clicked
 // if there's a draw - update title  -> to "it's a draw" -> reset the game board -> without updating the DM
 // if there's a win -> update DM -> update title -> to 'player X wins' -> rest the game board
+
+var gameData = {
+    // hold the player data w the player inside as its own object, the game data, the current state
+    player1: {
+        id: id,
+        token: "🐁",
+        currentTurn: boolean,
+        wins: numWins,
+        squares: squares
+    },
+    player2: {
+        id: id,
+        token: "🐈‍⬛",
+        currentTurn: boolean,
+        wins: numWins,
+        squares: squares
+    },
+    player1Squares: [], // will have new square objects w ids and winning combos, iterate over this array does this have 3 objects that all have a
+    player2Squares: [], // what if this is a string instead and everytime a player selects a square, the letter is tacked on the end of the string
+}
 */
