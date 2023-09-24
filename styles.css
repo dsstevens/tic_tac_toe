@@ -90,3 +90,6 @@ header {
 
 }
 
+.disabled {
+    pointer-events: none
+}
