@@ -5,26 +5,14 @@ var gameBoard = document.querySelector(".gameboard")
 var player2Wins = document.querySelector(".player2Wins")
 
 //Event Listeners
-window.addEventListener("load", showFirstTurn)
+window.addEventListener("load", showGamePlay)
 gameBoard.addEventListener("click",function(event){
     event.preventDefault()
+
+
 })
 
 // data Model
-var player1 = gameData.player1
-var player2 = gameData.player2
-var currentPlayer = player1
-var playerWinCombos = {
-    A: 0,
-    B: 0,
-    C: 0,
-    D: 0,
-    E: 0,
-    F: 0,
-    G: 0,
-    H: 0
-}
-
 var winningCombos = {
     one: ["ADG"],
 	two: ["BD"],
@@ -36,36 +24,49 @@ var winningCombos = {
 	eight: ["BF"],
     nine: ["CFG"]
 };
-var gameData = [
+var gameData = {
     // hold the player data w the player inside as its own object, the game data, the current state
-    player1 = {
+    player1: {
         id: 1,
         token: "🐁",
         currentTurn: true,
         wins: 0,
-        squares: []
+        squares: [],
+        currentCombos: {
+            A: 0,
+            B: 0,
+            C: 0,
+            D: 0,
+            E: 0,
+            F: 0,
+            G: 0,
+            H: 0
+        }
     },
-    player2 = {
+    player2: {
         id: 2,
         token: "🐈‍⬛",
         currentTurn: false,
         wins: 0,
-        squares: []
+        squares: [],
+        currentCombos: {
+            A: 0,
+            B: 0,
+            C: 0,
+            D: 0,
+            E: 0,
+            F: 0,
+            G: 0,
+            H: 0
+        }
     },
-   // will have new square objects w ids and winning combos, iterate over this array does this have 3 objects that all have a
-   // what if this is a string instead and everytime a player selects a square, the letter is tacked on the end of the string
-]
-
-
-function alternateRounds() {
-    for (var i = 0; i < gameData.length; i++){
-        if (gameData[i].currentTurn === true){
-            gameData[i].currentTurn = false
-        } else if (gameData[i].currentTurn === false) {
-            gameData[i].currentTurn = true
-    }
- }
+    //squares: will have new square objects w ids and winning combos, iterate over this array does this have 3 objects that all have a
+    // what if this is a string instead and everytime a player selects a square, the letter is tacked on the end of the string
 }
+
+// var player1 
+// var player2 
+var currentPlayer 
 
 //A function that creates the objects that store each players’ information - properties should include: id (ex: 'one'), token (ex: '⭐️'), wins (ex: 0)
 
@@ -80,11 +81,23 @@ function createPlayer(id, token, boolean, numWins, squares){
     return player
 }
 
-function showFirstTurn(){
+function alternateRounds() {
+    for (var i = 0; i < gameData.length; i++){
+        if (gameData[i].currentTurn === true){
+            gameData[i].currentTurn = false
+        } else if (gameData[i].currentTurn === false) {
+            gameData[i].currentTurn = true
+    }
+ }
+}
+
+
+function showGamePlay(){
     //connect the players in game data to the event listener to initiate game play
     //currently player 1
     // update dom with innerHTML for the first player's turn
-
+    currentPlayer = gameData.player1
+    gameState.innerHTML = `It's ${gameData.player1.token}'s Turn!`
 }
 
 //A function that resets the game board’s data to begin a new game
@@ -100,30 +113,15 @@ function resetGame(){
         G: 0,
         H: 0
     },
-    gameData = [
-        player1 = {
-            id: 1,
-            token: "🐁",
-            currentTurn: false,
-            wins: 0,
-            squares: []
-        },
-        player2 = {
-            id: 2,
-            token: "🐈‍⬛",
-            currentTurn: false,
-            wins: 0,
-            squares: []
-        },
-    ],
+    //reset the turn of the player
     alternateRounds() 
 };
 
-function playSquare(squareIdString){
+function playSquare(squareIdString, player){
     idArray = squareIdString.split("")
     for (var i = 0; i < idArray.length; i++){
-        playerWinCombos
-    }
+        player[playerTurn][idarray[i]] += 1
+    } //access the player 1 and player 2 nested data within the objects
 }
 
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
