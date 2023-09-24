@@ -6,7 +6,9 @@ var player2Wins = document.querySelector(".player2Wins")
 
 //Event Listeners
 window.addEventListener("load", showFirstTurn)
-gameBoard.addEventListener("click", )
+gameBoard.addEventListener("click",function(event){
+    event.preventDefault()
+})
 
 // data Model
 var player1 = gameData.player1
@@ -39,7 +41,7 @@ var gameData = [
     player1 = {
         id: 1,
         token: "🐁",
-        currentTurn: false,
+        currentTurn: true,
         wins: 0,
         squares: []
     },
@@ -56,7 +58,7 @@ var gameData = [
 
 
 function alternateRounds() {
-    for (var i = 0; i <gameData.length; i++){
+    for (var i = 0; i < gameData.length; i++){
         if (gameData[i].currentTurn === true){
             gameData[i].currentTurn = false
         } else if (gameData[i].currentTurn === false) {
@@ -77,6 +79,14 @@ function createPlayer(id, token, boolean, numWins, squares){
     }
     return player
 }
+
+function showFirstTurn(){
+    //connect the players in game data to the event listener to initiate game play
+    //currently player 1
+    // update dom with innerHTML for the first player's turn
+
+}
+
 //A function that resets the game board’s data to begin a new game
 function resetGame(){
     //***alternate player 1 or player 2: call in switchPlayer ?
