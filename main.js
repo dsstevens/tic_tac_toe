@@ -8,10 +8,14 @@ var player2Wins = document.querySelector(".player2Wins")
 window.addEventListener("load", showGamePlay)
 gameBoard.addEventListener("click",function(event){
     event.preventDefault()
-    playSquare(event.target.id,currentPlayer.id)
-    console.log('most recent event--->', event.target)
-    updateSquareDOM(event, currentPlayer.token)
-    switchPlayer()
+
+    if(event.target.classList.contains('box')) {
+        playSquare(event.target.id,currentPlayer.id)
+        updateSquareDOM(event, currentPlayer.token)
+        switchPlayer()
+        increaseWins(currentPlayer)
+        console.log("this is the current wins", currentPlayer.wins)
+    }
 })
 
 // data Model
@@ -125,6 +129,7 @@ function switchPlayer(){
 }
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
 function increaseWins(player){
+    if (player.currentCombos)
     return player.wins +=1
 }
 
