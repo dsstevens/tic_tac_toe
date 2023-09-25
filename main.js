@@ -8,13 +8,12 @@ var player2Wins = document.querySelector(".player2Wins")
 window.addEventListener("load", showGamePlay)
 gameBoard.addEventListener("click",function(event){
     event.preventDefault()
-
-    if(event.target.classList.contains('box')) {
-        playSquare(event.target.id,currentPlayer.id)
+     if(event.target.classList.contains('box')) {
+        playSquare(event.target.id, currentPlayer.id)
         updateSquareDOM(event, currentPlayer.token)
         switchPlayer()
-        increaseWins(currentPlayer)
-        console.log("this is the current wins", currentPlayer.wins)
+        // increaseWins(currentPlayer)
+        console.log("this is the currentPlayer.id", currentPlayer.id)
     }
 })
 
@@ -86,9 +85,6 @@ function createPlayer(id, token, boolean, numWins, squares){
     return player
 }
 function showGamePlay(){
-    //connect the players in game data to the event listener to initiate game play
-    //currently player 1
-    // update dom with innerHTML for the first player's turn
     currentPlayer = gameData['player1']
     gameState.innerHTML = `It's ${gameData.player1.token}'s Turn!`
 }
@@ -118,14 +114,16 @@ function playSquare(squareIdString, player){
 
 function updateSquareDOM(event,token) {
     event.target.innerHTML += token
+    event.target.classList.add("disabled")
 }
 
 function switchPlayer(){
     if (currentPlayer.id === 'player1') {
         currentPlayer = gameData['player2']
     } else {
-        currentPlayer.id = gameData['player1']
+        currentPlayer = gameData['player1']
     }
+    // how to change the current turn property to reflect the turn vs default t/f?
 }
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
 function increaseWins(player){
