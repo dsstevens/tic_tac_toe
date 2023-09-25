@@ -139,14 +139,16 @@ function checkForWin(player){
             console.log(gameData[player].currentCombos[comboArray[i]])
             increaseWins(gameData[player])
           console.log(gameData[player].wins)
+          resetGame()
         }
-            
+        
     }
     //call resetGame
     // GameData player1: createPlayer(“player1”, “token” etc.)
     
 }
 
+//A function that detects when a game is a draw (no one has won)
 function checkForDraw(){
     // if no winning combos and no empty squares
     //call checkForWin
@@ -157,6 +159,16 @@ function checkForDraw(){
     //reset
 }
 
+// A function that resets the game board’s data to begin a new game
+function resetGame(){
+    gameData.player1.currentCombos = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0, H: 0 };
+    gameData.player2.currentCombos = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0, H: 0 };
+    gameData.player1.wins = 0
+    gameData.player1.wins = 0
+    //reset the turn of the round with a new function ---> alternateRounds() 
+}
+// A function that keeps track of which player’s turn it currently is
+
 //A function that keeps track of the data for the game board
 function trackGameboard(){
     //which squares are empty, which have been clicked and have an icon on it
@@ -164,24 +176,8 @@ function trackGameboard(){
     //could the squares have a property like null and check for null
 }
 
-//A function that resets the game board’s data to begin a new game
-// function resetGame(){
-//     player.currentCombos = {
-//         A: 0,
-//         B: 0,
-//         C: 0,
-//         D: 0,
-//         E: 0,
-//         F: 0,
-//         G: 0,
-//         H: 0
-//     },
-//     //reset the turn of the round with a new function ---> alternateRounds() 
-// }
-//A function that keeps track of which player’s turn it currently is
 
 
-//A function that detects when a game is a draw (no one has won)
 
 /*
 ----> look at the hobbit test
