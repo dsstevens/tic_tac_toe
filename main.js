@@ -90,6 +90,7 @@ function showGamePlay(){
 }
 
 function playSquare(squareIdString, player){
+    gameData[player].squares.push(squareIdString)
     idArray = squareIdString.split("")
     for (var i = 0; i < idArray.length; i++){
        gameData[player].currentCombos[idArray[i]] += 1
@@ -114,10 +115,11 @@ function switchPlayer(){
     }
     // how to change the current turn property to reflect the turn vs default t/f?
     // how to change the innerHTML to reflect the current player's turn?
+    // we have this function already within the load event listener: showGamePlay: could invoke it again or repetitive?
 }
 
 //A function that checks the game board data for win conditions
-function checkForWin(){
+function checkForWin(player){
     //compare the current occupied squares to winning combos
     // square object could contain boolean for clicked, id number, held the win conditions it's a part of
     //win conditions rep by letters of the combo that the square is a part of 
@@ -132,6 +134,20 @@ function checkForWin(){
         ["ADG","BEGH","CFG"],
         ["CDH","BEGH","AFH"],
     ]
+    gameData[player].currentCombos
+}
+function compareSquares(){
+    
+}
+function checkForDraw(){
+    //compare current occupied squares to winning combos 
+    //specifically compare the player's squares based on ids of the playerone squares
+    //iterate over object w Object.keys(playerWinCombos)
+    //if (newArray[i] === 3) {there was a win, add in to player one object to update dm and dom}
+    // if no winning combos and no empty squares
+    //call checkForWin
+    //call switchPlayer
+    //call resetGame
 }
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
 function increaseWins(player){
@@ -164,16 +180,6 @@ function trackGameboard(){
 
 
 //A function that detects when a game is a draw (no one has won)
-function checkForDraw(){
-    //compare current occupied squares to winning combos 
-    //specifically compare the player's squares based on ids of the playerone squares
-    //iterate over object w Object.keys(playerWinCombos)
-    //if (newArray[i] === 3) {there was a win, add in to player one object to update dm and dom}
-    // if no winning combos and no empty squares
-    //call checkForWin
-    //call switchPlayer
-    //call resetGame
-}
 
 /*
 ----> look at the hobbit test
