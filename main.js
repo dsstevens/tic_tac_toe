@@ -89,21 +89,6 @@ function showGamePlay(){
     gameState.innerHTML = `It's ${gameData.player1.token}'s Turn!`
 }
 
-//A function that resets the game board’s data to begin a new game
-// function resetGame(){
-//     player.currentCombos = {
-//         A: 0,
-//         B: 0,
-//         C: 0,
-//         D: 0,
-//         E: 0,
-//         F: 0,
-//         G: 0,
-//         H: 0
-//     },
-//     //reset the turn of the round with a new function ---> alternateRounds() 
-// }
-
 function playSquare(squareIdString, player){
     idArray = squareIdString.split("")
     for (var i = 0; i < idArray.length; i++){
@@ -115,6 +100,10 @@ function playSquare(squareIdString, player){
 function updateSquareDOM(event,token) {
     event.target.innerHTML += token
     event.target.classList.add("disabled")
+/*could also do a conditional to not have to worry about flipping the disabled property afterward:
+//if (!event.target.innerHTML) {
+    event.target.innerHTML += token;
+}*/
 }
 
 function switchPlayer(){
@@ -124,6 +113,25 @@ function switchPlayer(){
         currentPlayer = gameData['player1']
     }
     // how to change the current turn property to reflect the turn vs default t/f?
+    // how to change the innerHTML to reflect the current player's turn?
+}
+
+//A function that checks the game board data for win conditions
+function checkForWin(){
+    //compare the current occupied squares to winning combos
+    // square object could contain boolean for clicked, id number, held the win conditions it's a part of
+    //win conditions rep by letters of the combo that the square is a part of 
+    //call resetGame
+    var winCombos = [
+        ["ADG","BD","CDH"],
+        ["AE","BEGH","CE"],
+        ["AFH","BF","CFG"],
+        ["ADG","AE","AFH"],
+        ["BD","BEGH","BF"],
+        ["CDH","CE","CFG"],
+        ["ADG","BEGH","CFG"],
+        ["CDH","BEGH","AFH"],
+    ]
 }
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
 function increaseWins(player){
@@ -138,15 +146,22 @@ function trackGameboard(){
     //could the squares have a property like null and check for null
 }
 
+//A function that resets the game board’s data to begin a new game
+// function resetGame(){
+//     player.currentCombos = {
+//         A: 0,
+//         B: 0,
+//         C: 0,
+//         D: 0,
+//         E: 0,
+//         F: 0,
+//         G: 0,
+//         H: 0
+//     },
+//     //reset the turn of the round with a new function ---> alternateRounds() 
+// }
 //A function that keeps track of which player’s turn it currently is
 
-//A function that checks the game board data for win conditions
-function checkForWin(){
-    //compare the current occupied squares to winning combos
-    // square object could contain boolean for clicked, id number, held the win conditions it's a part of
-    //win conditions rep by letters of the combo that the square is a part of 
-    //call resetGame
-}
 
 //A function that detects when a game is a draw (no one has won)
 function checkForDraw(){
@@ -164,16 +179,6 @@ function checkForDraw(){
 ----> look at the hobbit test
 ----> create 2 player objects to update
 
-var winningCombos = {
-    one: ["ADG","BD","CDH"],
-    two: ["AE","BEGH","CE"],
-    three: ["AFH","BF","CFG"],
-    four: ["ADG","AE","AFH"],
-    five: ["BD","BEGH","BF"],
-    six: ["CDH","CE","CFG"],
-    seven: ["ADG","BEGH","CFG"],
-    eight: ["CDH","BEGH","AFH"],
-};
 hold player 1 and player 2’s data
 var gameData = [{id= "", player: 1}, {id='', player: 2}]
 
