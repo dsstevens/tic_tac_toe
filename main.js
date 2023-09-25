@@ -11,9 +11,9 @@ gameBoard.addEventListener("click",function(event){
      if(event.target.classList.contains('box')) {
         playSquare(event.target.id, currentPlayer.id)
         updateSquareDOM(event, currentPlayer.token)
-        // switchPlayer()
         console.log("this is the currentPlayer.id", currentPlayer.id)
         checkForWin(currentPlayer.id)
+        switchPlayer()
         
     }
 })
@@ -97,9 +97,7 @@ function playSquare(squareIdString, player){
        gameData[player].currentCombos[idArray[i]] += 1
     } //access the player 1 and player 2 nested data within the objects
     console.log(currentPlayer)
-    checkForWin(player)
-    switchPlayer()
-    //commented out the event listener, need to figure out how to get player 1 to go first, now going with player2
+    //commented out the event listener, need to figure out how to get player 1 to go first, now going with player2, if it's in the event listener, the wins aren't accurate
 }
 
 function updateSquareDOM(event,token) {
@@ -139,14 +137,16 @@ function checkForWin(player){
             console.log(gameData[player].currentCombos[comboArray[i]])
             increaseWins(gameData[player])
           console.log(gameData[player].wins)
+          resetGame()
         }
-            
+        
     }
     //call resetGame
     // GameData player1: createPlayer(“player1”, “token” etc.)
     
 }
 
+//A function that detects when a game is a draw (no one has won)
 function checkForDraw(){
     // if no winning combos and no empty squares
     //call checkForWin
@@ -157,6 +157,31 @@ function checkForDraw(){
     //reset
 }
 
+// A function that keeps track of which player’s turn it currently is
+// function alternateRounds() {
+//     for (var i = 0; i < gameData.length; i++){
+//         if (gameData[i].currentTurn === true){
+//             gameData[i].currentTurn = false
+//         } else if (gameData[i].currentTurn === false) {
+//             gameData[i].currentTurn = true
+//     }
+//  }
+// }
+
+function alternateRounds() {
+    gameData.player1.currentTurn = !gameData.player1.currentTurn;
+    gameData.player2.currentTurn = !gameData.player2.currentTurn;
+}
+
+// A function that resets the game board’s data to begin a new game
+function resetGame(){
+    gameData.player1.currentCombos = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0, H: 0 };
+    gameData.player2.currentCombos = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0, H: 0 };
+    gameData.player1.squares = []
+    gameData.player2.squares = []
+    setTimeout(alternateRounds, 1000)
+    //reset the turn of the round with a new function ---> alternateRounds() 
+}
 //A function that keeps track of the data for the game board
 function trackGameboard(){
     //which squares are empty, which have been clicked and have an icon on it
@@ -164,24 +189,8 @@ function trackGameboard(){
     //could the squares have a property like null and check for null
 }
 
-//A function that resets the game board’s data to begin a new game
-// function resetGame(){
-//     player.currentCombos = {
-//         A: 0,
-//         B: 0,
-//         C: 0,
-//         D: 0,
-//         E: 0,
-//         F: 0,
-//         G: 0,
-//         H: 0
-//     },
-//     //reset the turn of the round with a new function ---> alternateRounds() 
-// }
-//A function that keeps track of which player’s turn it currently is
 
 
-//A function that detects when a game is a draw (no one has won)
 
 /*
 ----> look at the hobbit test
@@ -265,15 +274,7 @@ function randomizeTurn(gameData) {
     var randomIndex = Math.floor(Math.random()* gameData.length)
     return gameData[randomIndex]
 }
-function alternateRounds() {
-    for (var i = 0; i < gameData.length; i++){
-        if (gameData[i].currentTurn === true){
-            gameData[i].currentTurn = false
-        } else if (gameData[i].currentTurn === false) {
-            gameData[i].currentTurn = true
-    }
- }
-}
+
 
 var alternatePlayers = 1
 */
