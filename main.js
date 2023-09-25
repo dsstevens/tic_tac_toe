@@ -11,9 +11,10 @@ gameBoard.addEventListener("click",function(event){
      if(event.target.classList.contains('box')) {
         playSquare(event.target.id, currentPlayer.id)
         updateSquareDOM(event, currentPlayer.token)
-        switchPlayer()
-        // increaseWins(currentPlayer)
+        // switchPlayer()
         console.log("this is the currentPlayer.id", currentPlayer.id)
+        checkForWin(currentPlayer.id)
+        
     }
 })
 
@@ -96,6 +97,9 @@ function playSquare(squareIdString, player){
        gameData[player].currentCombos[idArray[i]] += 1
     } //access the player 1 and player 2 nested data within the objects
     console.log(currentPlayer)
+    checkForWin(player)
+    switchPlayer()
+    //commented out the event listener, need to figure out how to get player 1 to go first, now going with player2
 }
 
 function updateSquareDOM(event,token) {
@@ -113,46 +117,44 @@ function switchPlayer(){
     } else {
         currentPlayer = gameData['player1']
     }
+
     // how to change the current turn property to reflect the turn vs default t/f?
     // how to change the innerHTML to reflect the current player's turn?
     // we have this function already within the load event listener: showGamePlay: could invoke it again or repetitive?
 }
 
+//A function called increaseWins - increases the count of a player’s wins (should work for either player)
+function increaseWins(player){
+    return player.wins += 1
+}
+
 //A function that checks the game board data for win conditions
 function checkForWin(player){
-    //compare the current occupied squares to winning combos
-    // square object could contain boolean for clicked, id number, held the win conditions it's a part of
-    //win conditions rep by letters of the combo that the square is a part of 
-    //call resetGame
-    var winCombos = [
-        ["ADG","BD","CDH"],
-        ["AE","BEGH","CE"],
-        ["AFH","BF","CFG"],
-        ["ADG","AE","AFH"],
-        ["BD","BEGH","BF"],
-        ["CDH","CE","CFG"],
-        ["ADG","BEGH","CFG"],
-        ["CDH","BEGH","AFH"],
-    ]
-    gameData[player].currentCombos
-}
-function compareSquares(){
-    
-}
-function checkForDraw(){
-    //compare current occupied squares to winning combos 
-    //specifically compare the player's squares based on ids of the playerone squares
     //iterate over object w Object.keys(playerWinCombos)
     //if (newArray[i] === 3) {there was a win, add in to player one object to update dm and dom}
+    
+    var comboArray = Object.keys(gameData[player].currentCombos)
+    for (var i = 0; i < comboArray.length; i++){
+        if(gameData[player].currentCombos[comboArray[i]] > 2){
+            console.log(gameData[player].currentCombos[comboArray[i]])
+            increaseWins(gameData[player])
+          console.log(player.wins)
+        }
+            
+    }
+    //call resetGame
+    // GameData player1: createPlayer(“player1”, “token” etc.)
+    
+}
+
+function checkForDraw(){
     // if no winning combos and no empty squares
     //call checkForWin
     //call switchPlayer
     //call resetGame
-}
-//A function called increaseWins - increases the count of a player’s wins (should work for either player)
-function increaseWins(player){
-    if (player.currentCombos)
-    return player.wins +=1
+    //count the array of squares for each player to total 9 if length of arrays === 9 && checkfor win = false then draw
+    //call draw dom functino to replace message
+    //reset
 }
 
 //A function that keeps track of the data for the game board
