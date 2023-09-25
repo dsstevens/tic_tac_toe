@@ -8,11 +8,10 @@ var player2Wins = document.querySelector(".player2Wins")
 window.addEventListener("load", showGamePlay)
 gameBoard.addEventListener("click",function(event){
     event.preventDefault()
-    if(event.target.classList.contains('box')) {
-        playSquare(event.target.id,currentPlayer.id)
-        updateSquareDOM(event, currentPlayer.token)
-        switchPlayer()
-    }
+    playSquare(event.target.id,currentPlayer.id)
+    console.log('most recent event--->', event.target)
+    updateSquareDOM(event, currentPlayer.token)
+    switchPlayer()
 })
 
 // data Model
@@ -115,14 +114,13 @@ function playSquare(squareIdString, player){
 
 function updateSquareDOM(event,token) {
     event.target.innerHTML += token
-    event.target.classList.add("disabled")
 }
 
 function switchPlayer(){
     if (currentPlayer.id === 'player1') {
         currentPlayer = gameData['player2']
     } else {
-        currentPlayer = gameData['player1']
+        currentPlayer.id = gameData['player1']
     }
 }
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
