@@ -8,13 +8,13 @@ var player2Wins = document.querySelector(".player2Wins")
 window.addEventListener("load", showGamePlay)
 gameBoard.addEventListener("click",function(event){
     event.preventDefault()
-
-    if(event.target.classList.contains('box')) {
-        playSquare(event.target.id,currentPlayer.id)
+     if(event.target.classList.contains('box')) {
+        playSquare(event.target.id, currentPlayer.id)
         updateSquareDOM(event, currentPlayer.token)
-        switchPlayer()
-        increaseWins(currentPlayer)
-        console.log("this is the current wins", currentPlayer.wins)
+        // switchPlayer()
+        console.log("this is the currentPlayer.id", currentPlayer.id)
+        checkForWin(currentPlayer.id)
+        
     }
 })
 
@@ -86,11 +86,82 @@ function createPlayer(id, token, boolean, numWins, squares){
     return player
 }
 function showGamePlay(){
-    //connect the players in game data to the event listener to initiate game play
-    //currently player 1
-    // update dom with innerHTML for the first player's turn
     currentPlayer = gameData['player1']
     gameState.innerHTML = `It's ${gameData.player1.token}'s Turn!`
+}
+
+function playSquare(squareIdString, player){
+    gameData[player].squares.push(squareIdString)
+    idArray = squareIdString.split("")
+    for (var i = 0; i < idArray.length; i++){
+       gameData[player].currentCombos[idArray[i]] += 1
+    } //access the player 1 and player 2 nested data within the objects
+    console.log(currentPlayer)
+    checkForWin(player)
+    switchPlayer()
+    //commented out the event listener, need to figure out how to get player 1 to go first, now going with player2
+}
+
+function updateSquareDOM(event,token) {
+    event.target.innerHTML += token
+    event.target.classList.add("disabled")
+/*could also do a conditional to not have to worry about flipping the disabled property afterward:
+//if (!event.target.innerHTML) {
+    event.target.innerHTML += token;
+}*/
+}
+
+function switchPlayer(){
+    if (currentPlayer.id === 'player1') {
+        currentPlayer = gameData['player2']
+    } else {
+        currentPlayer = gameData['player1']
+    }
+
+    // how to change the current turn property to reflect the turn vs default t/f?
+    // how to change the innerHTML to reflect the current player's turn?
+    // we have this function already within the load event listener: showGamePlay: could invoke it again or repetitive?
+}
+
+//A function called increaseWins - increases the count of a player’s wins (should work for either player)
+function increaseWins(player){
+    return player.wins += 1
+}
+
+//A function that checks the game board data for win conditions
+function checkForWin(player){
+    //iterate over object w Object.keys(playerWinCombos)
+    //if (newArray[i] === 3) {there was a win, add in to player one object to update dm and dom}
+    
+    var comboArray = Object.keys(gameData[player].currentCombos)
+    for (var i = 0; i < comboArray.length; i++){
+        if(gameData[player].currentCombos[comboArray[i]] > 2){
+            console.log(gameData[player].currentCombos[comboArray[i]])
+            increaseWins(gameData[player])
+          console.log(gameData[player].wins)
+        }
+            
+    }
+    //call resetGame
+    // GameData player1: createPlayer(“player1”, “token” etc.)
+    
+}
+
+function checkForDraw(){
+    // if no winning combos and no empty squares
+    //call checkForWin
+    //call switchPlayer
+    //call resetGame
+    //count the array of squares for each player to total 9 if length of arrays === 9 && checkfor win = false then draw
+    //call draw dom functino to replace message
+    //reset
+}
+
+//A function that keeps track of the data for the game board
+function trackGameboard(){
+    //which squares are empty, which have been clicked and have an icon on it
+    //should each square be an object with properties like clicked
+    //could the squares have a property like null and check for null
 }
 
 //A function that resets the game board’s data to begin a new game
@@ -107,75 +178,15 @@ function showGamePlay(){
 //     },
 //     //reset the turn of the round with a new function ---> alternateRounds() 
 // }
-
-function playSquare(squareIdString, player){
-    idArray = squareIdString.split("")
-    for (var i = 0; i < idArray.length; i++){
-       gameData[player].currentCombos[idArray[i]] += 1
-    } //access the player 1 and player 2 nested data within the objects
-    console.log(currentPlayer)
-}
-
-function updateSquareDOM(event,token) {
-    event.target.innerHTML += token
-}
-
-function switchPlayer(){
-    if (currentPlayer.id === 'player1') {
-        currentPlayer = gameData['player2']
-    } else {
-        currentPlayer.id = gameData['player1']
-    }
-}
-//A function called increaseWins - increases the count of a player’s wins (should work for either player)
-function increaseWins(player){
-    if (player.currentCombos)
-    return player.wins +=1
-}
-
-//A function that keeps track of the data for the game board
-function trackGameboard(){
-    //which squares are empty, which have been clicked and have an icon on it
-    //should each square be an object with properties like clicked
-    //could the squares have a property like null and check for null
-}
-
 //A function that keeps track of which player’s turn it currently is
 
-//A function that checks the game board data for win conditions
-function checkForWin(){
-    //compare the current occupied squares to winning combos
-    // square object could contain boolean for clicked, id number, held the win conditions it's a part of
-    //win conditions rep by letters of the combo that the square is a part of 
-    //call resetGame
-}
 
 //A function that detects when a game is a draw (no one has won)
-function checkForDraw(){
-    //compare current occupied squares to winning combos 
-    //specifically compare the player's squares based on ids of the playerone squares
-    //iterate over object w Object.keys(playerWinCombos)
-    //if (newArray[i] === 3) {there was a win, add in to player one object to update dm and dom}
-    // if no winning combos and no empty squares
-    //call checkForWin
-    //call switchPlayer
-    //call resetGame
-}
 
 /*
 ----> look at the hobbit test
 ----> create 2 player objects to update
 
-var winningCombos = {
-    one: ["ADG","BD","CDH"],
-    two: ["AE","BEGH","CE"],
-    three: ["AFH","BF","CFG"],
-    four: ["ADG","AE","AFH"],
-    five: ["BD","BEGH","BF"],
-    six: ["CDH","CE","CFG"],
-    seven: ["ADG","BEGH","CFG"],
-    eight: ["CDH","BEGH","AFH"],
-};
 hold player 1 and player 2’s data
 var gameData = [{id= "", player: 1}, {id='', player: 2}]
 
