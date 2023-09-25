@@ -138,7 +138,7 @@ function checkForWin(player){
         if(gameData[player].currentCombos[comboArray[i]] > 2){
             console.log(gameData[player].currentCombos[comboArray[i]])
             increaseWins(gameData[player])
-          console.log(player.wins)
+          console.log(gameData[player].wins)
         }
             
     }
