@@ -12,6 +12,8 @@ gameBoard.addEventListener("click",function(event){
         playSquare(event.target.id,currentPlayer.id)
         updateSquareDOM(event, currentPlayer.token)
         switchPlayer()
+        increaseWins(currentPlayer)
+        console.log("this is the current wins", currentPlayer.wins)
     }
 })
 
@@ -127,6 +129,7 @@ function switchPlayer(){
 }
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
 function increaseWins(player){
+    if (player.currentCombos)
     return player.wins +=1
 }
 
