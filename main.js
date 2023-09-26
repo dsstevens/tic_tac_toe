@@ -13,7 +13,6 @@ gameBoard.addEventListener("click",function(event){
         playSquare(event.target.id, currentPlayer.id)
         updateSquareDOM(event, currentPlayer.token)
         disableSquare(event)
-        // console.log("this is the currentPlayer.id", currentPlayer.id)
         if (checkForWin(currentPlayer.id)){
             updateWins(currentPlayer)
             updateWinMessage()
@@ -106,9 +105,7 @@ function playSquare(squareIdString, player){
     idArray = squareIdString.split("")
     for (var i = 0; i < idArray.length; i++){
         gameData[player].currentCombos[idArray[i]] += 1
-    } //access the player 1 and player 2 nested data within the objects
-    // console.log(currentPlayer)
-    //commented out the event listener, need to figure out how to get player 1 to go first, now going with player2, if it's in the event listener, the wins aren't accurate
+    } 
 }
 
 function updateSquareDOM(event,token) {
@@ -135,9 +132,7 @@ function updateTurnMessage() {
 }
 
 function updateWinMessage() {
-    // console.log("this is the banner win message")
     gameState.innerHTML = `${currentPlayer.token} Wins!`;
-    
 }
 
 function updateDrawMessage(){
@@ -163,9 +158,7 @@ function checkForWin(player){
     var comboArray = Object.keys(gameData[player].currentCombos)
     for (var i = 0; i < comboArray.length; i++){
         if(gameData[player].currentCombos[comboArray[i]] > 2){
-            // console.log(gameData[player].currentCombos[comboArray[i]])
             increaseWins(gameData[player])
-            console.log(gameData[player].wins)
             return true
         }
     }
@@ -184,7 +177,6 @@ function alternateRounds() {
 
 // A function that resets the game board’s data to begin a new game
 function resetGame(){
-    // console.log("this is the reset game")
     gameData.player1.currentCombos = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0, H: 0 };
     gameData.player2.currentCombos = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0, H: 0 };
     gameData.player1.squares = []
@@ -195,12 +187,9 @@ function resetGame(){
     
 }
 
-
 function clearGameBoard(){
-    // console.log("this is clearing before for loop")
     for(var i = 0; i < boxes.length; i++){
         boxes[i].innerHTML = ""
-        // console.log("this is clearing after for loop")
     }
 }
 function disableSquare(event){
@@ -208,7 +197,6 @@ function disableSquare(event){
 }
 function enableSquare(){
     for(var i = 0; i < boxes.length; i++){
-        console.log("for loop enabling")
         boxes[i].classList.remove("disabled")
     }
     
