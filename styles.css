@@ -23,7 +23,6 @@ h3{
 .player-1-aside {
     width: 20%;
     background-image: linear-gradient(to right, #EDF171, #F1A8E4);
-
 }
 
 .player-container {
@@ -39,7 +38,6 @@ h3{
   flex-direction: column;
   background-image: linear-gradient(to right, #F1A8E4 , #EDF171, #F1A8E4);
   align-items: center;
-  /* border: solid green 2px; */
 }  
 
 header {
@@ -75,8 +73,10 @@ header {
     flex-wrap: wrap;
     font-size: 80px;
     align-content: center;
-    justify-content: center
+    justify-content: center;
+    cursor: pointer
 }
+
 .box:nth-child(3n) {
     border-right: none;
 }
@@ -88,9 +88,8 @@ header {
 .player-2-aside {
     width: 20%;
     background-image: linear-gradient(to right, #F1A8E4 ,#EDF171);
-
 }
 
 .disabled {
-    pointer-events:none
+    pointer-events: none
 }
