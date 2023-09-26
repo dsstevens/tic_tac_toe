@@ -3,6 +3,7 @@ var player1Wins = document.querySelector("#player1Wins")
 var gameState = document.querySelector(".game-state")
 var gameBoard = document.querySelector(".gameboard")
 var player2Wins = document.querySelector(".player2Wins")
+var boxes = document.querySelectorAll(".box")
 
 //Event Listeners
 window.addEventListener("load", showGamePlay)
@@ -132,41 +133,29 @@ function checkForWin(player){
     //if (newArray[i] === 3) {there was a win, add in to player one object to update dm and dom}
     
     var comboArray = Object.keys(gameData[player].currentCombos)
+    var win = false
     for (var i = 0; i < comboArray.length; i++){
         if(gameData[player].currentCombos[comboArray[i]] > 2){
             console.log(gameData[player].currentCombos[comboArray[i]])
             increaseWins(gameData[player])
-          console.log(gameData[player].wins)
-          resetGame()
+            console.log(gameData[player].wins)
+            resetGame()
+            win = true
         }
         
     }
     //call resetGame
     // GameData player1: createPlayer(“player1”, “token” etc.)
-    
+    checkForDraw(win)
 }
 
 //A function that detects when a game is a draw (no one has won)
-function checkForDraw(){
-    // if no winning combos and no empty squares
-    //call checkForWin
-    //call switchPlayer
-    //call resetGame
-    //count the array of squares for each player to total 9 if length of arrays === 9 && checkfor win = false then draw
-    //call draw dom functino to replace message
-    //reset
+function checkForDraw(win){
+    if ((gameData.player1.squares.length + gameData.player2.squares.length) === 9 && win === false) {
+        updateDrawMessage()
+        resetGame()
+    }
 }
-
-// A function that keeps track of which player’s turn it currently is
-// function alternateRounds() {
-//     for (var i = 0; i < gameData.length; i++){
-//         if (gameData[i].currentTurn === true){
-//             gameData[i].currentTurn = false
-//         } else if (gameData[i].currentTurn === false) {
-//             gameData[i].currentTurn = true
-//     }
-//  }
-// }
 
 function alternateRounds() {
     gameData.player1.currentTurn = !gameData.player1.currentTurn;
@@ -180,14 +169,27 @@ function resetGame(){
     gameData.player1.squares = []
     gameData.player2.squares = []
     setTimeout(alternateRounds, 1000)
-    //reset the turn of the round with a new function ---> alternateRounds() 
+    clearGameBoard()
 }
+
+function updateDrawMessage(){
+    gameState.innerHTML = "It's a Draw!"
+}
+
+function clearGameBoard(){
+    for(var i = 0; i < boxes.length; i++){
+        boxes[i].innerHTML = ""
+    }
+}
+
+
+
 //A function that keeps track of the data for the game board
-function trackGameboard(){
+// function trackGameboard(){
     //which squares are empty, which have been clicked and have an icon on it
     //should each square be an object with properties like clicked
     //could the squares have a property like null and check for null
-}
+// }
 
 
 
