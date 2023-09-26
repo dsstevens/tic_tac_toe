@@ -19,12 +19,14 @@ gameBoard.addEventListener("click",function(event){
             updateWins(currentPlayer)
             updateWinMessage()
             switchPlayer()
-            setTimeout(resetGame, 1000)
+            setTimeout(resetGame(), 1000)
+            enableSquare()
         } else if (checkForDraw()){
             updateDrawMessage()
-            //disable squares
+            disableSquare(event)
             switchPlayer()
-            setTimeout(resetGame, 1000)
+            setTimeout(resetGame(), 1000)
+            enableSquare()
         } else {
             switchPlayer()
             updateTurnMessage()
@@ -191,6 +193,7 @@ function resetGame(){
     clearGameBoard()
     alternateRounds()
     updateTurnMessage()
+    // disableSquare(event)
     
 }
 
@@ -205,7 +208,13 @@ function clearGameBoard(){
 function disableSquare(event){
     event.target.classList.add("disabled")
 }
-
+function enableSquare(){
+    for(var i = 0; i < boxes.length; i++){
+        console.log("for loop enabling")
+        boxes[i].classList.remove("disabled")
+    }
+    
+}
 
 //A function that keeps track of the data for the game board
 // function trackGameboard(){
