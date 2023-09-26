@@ -15,7 +15,7 @@ gameBoard.addEventListener("click",function(event){
         // console.log("this is the currentPlayer.id", currentPlayer.id)
         checkForWin(currentPlayer.id)
         switchPlayer()
-        
+        // updateTurnMessage()
     }
 })
 
@@ -113,9 +113,13 @@ function switchPlayer(){
     } else {
         currentPlayer = gameData['player1']
     }
-    // updateTurnMessage()
+    
 }
 
+function updateTurnMessage(){
+    console.log("this is the turn message")
+    gameState.innerHTML = `It's ${gameData.player1.token}'s Turn!`
+}
 function updateWinMessage() {
     console.log("this is the banner win message")
     gameState.innerHTML = `${currentPlayer.token} Wins!`;
