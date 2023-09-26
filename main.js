@@ -12,10 +12,10 @@ gameBoard.addEventListener("click",function(event){
      if(event.target.classList.contains('box')) {
         playSquare(event.target.id, currentPlayer.id)
         updateSquareDOM(event, currentPlayer.token)
+        disableSquare(event)
         // console.log("this is the currentPlayer.id", currentPlayer.id)
         if (checkForWin(currentPlayer.id)){
             console.log("this is the win conditional")
-            //disable squares
             updateWins(currentPlayer)
             updateWinMessage()
             switchPlayer()
@@ -191,7 +191,7 @@ function resetGame(){
     clearGameBoard()
     alternateRounds()
     updateTurnMessage()
-    // setTimeout(, 1000)
+    
 }
 
 
@@ -202,8 +202,8 @@ function clearGameBoard(){
         // console.log("this is clearing after for loop")
     }
 }
-function disableSquares(){
-
+function disableSquare(event){
+    event.target.classList.add("disabled")
 }
 
 
