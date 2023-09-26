@@ -73,8 +73,9 @@ header {
     border-right: 2px solid;
     border-bottom: 2px solid;
     flex-wrap: wrap;
-    /* align-items: center; */
-    /* justify-content: center; */
+    font-size: 80px;
+    align-content: center;
+    justify-content: center
 }
 .box:nth-child(3n) {
     border-right: none;
