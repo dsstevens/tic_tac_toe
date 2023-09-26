@@ -2,7 +2,7 @@
 var player1Wins = document.querySelector("#player1Wins")
 var gameState = document.querySelector(".game-state")
 var gameBoard = document.querySelector(".gameboard")
-var player2Wins = document.querySelector(".player2Wins")
+var player2Wins = document.querySelector("#player2Wins")
 var boxes = document.querySelectorAll(".box")
 
 //Event Listeners
@@ -12,10 +12,25 @@ gameBoard.addEventListener("click",function(event){
      if(event.target.classList.contains('box')) {
         playSquare(event.target.id, currentPlayer.id)
         updateSquareDOM(event, currentPlayer.token)
-        console.log("this is the currentPlayer.id", currentPlayer.id)
-        checkForWin(currentPlayer.id)
-        switchPlayer()
-        
+        disableSquare(event)
+        // console.log("this is the currentPlayer.id", currentPlayer.id)
+        if (checkForWin(currentPlayer.id)){
+            console.log("this is the win conditional")
+            updateWins(currentPlayer)
+            updateWinMessage()
+            switchPlayer()
+            setTimeout(resetGame(), 1000)
+            enableSquare()
+        } else if (checkForDraw()){
+            updateDrawMessage()
+            disableSquare(event)
+            switchPlayer()
+            setTimeout(resetGame(), 1000)
+            enableSquare()
+        } else {
+            switchPlayer()
+            updateTurnMessage()
+        }
     }
 })
 
@@ -86,28 +101,21 @@ function createPlayer(id, token, boolean, numWins, squares){
     }
     return player
 }
-function showGamePlay(){
-    currentPlayer = gameData['player1']
-    gameState.innerHTML = `It's ${gameData.player1.token}'s Turn!`
-}
 
 function playSquare(squareIdString, player){
     gameData[player].squares.push(squareIdString)
     idArray = squareIdString.split("")
     for (var i = 0; i < idArray.length; i++){
-       gameData[player].currentCombos[idArray[i]] += 1
+        gameData[player].currentCombos[idArray[i]] += 1
     } //access the player 1 and player 2 nested data within the objects
-    console.log(currentPlayer)
+    // console.log(currentPlayer)
     //commented out the event listener, need to figure out how to get player 1 to go first, now going with player2, if it's in the event listener, the wins aren't accurate
 }
 
 function updateSquareDOM(event,token) {
-    event.target.innerHTML += token
-    event.target.classList.add("disabled")
-/*could also do a conditional to not have to worry about flipping the disabled property afterward:
-//if (!event.target.innerHTML) {
-    event.target.innerHTML += token;
-}*/
+    if (!event.target.innerHTML) {
+        event.target.innerHTML += token;
+    }
 }
 
 function switchPlayer(){
@@ -116,10 +124,34 @@ function switchPlayer(){
     } else {
         currentPlayer = gameData['player1']
     }
+}
 
-    // how to change the current turn property to reflect the turn vs default t/f?
-    // how to change the innerHTML to reflect the current player's turn?
-    // we have this function already within the load event listener: showGamePlay: could invoke it again or repetitive?
+function showGamePlay(){
+    currentPlayer = gameData['player1']
+    gameState.innerHTML = `It's ${gameData.player1.token}'s Turn!`
+}
+
+function updateTurnMessage() {
+    gameState.innerHTML = `It's ${currentPlayer.token}'s Turn!`
+}
+
+function updateWinMessage() {
+    // console.log("this is the banner win message")
+    gameState.innerHTML = `${currentPlayer.token} Wins!`;
+    
+}
+
+function updateDrawMessage(){
+    gameState.innerHTML = "It's a Draw!"
+    setTimeout(updateTurnMessage, 2000)
+}
+
+function updateWins(player){
+    if(player === gameData.player1){
+        player1Wins.innerHTML = `SCORE: ${player.wins}`
+    } else {
+        player2Wins.innerHTML = `SCORE: ${player.wins}`
+    }  
 }
 
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
@@ -128,32 +160,21 @@ function increaseWins(player){
 }
 
 //A function that checks the game board data for win conditions
-function checkForWin(player){
-    //iterate over object w Object.keys(playerWinCombos)
-    //if (newArray[i] === 3) {there was a win, add in to player one object to update dm and dom}
-    
+function checkForWin(player){  
     var comboArray = Object.keys(gameData[player].currentCombos)
-    var win = false
     for (var i = 0; i < comboArray.length; i++){
         if(gameData[player].currentCombos[comboArray[i]] > 2){
-            console.log(gameData[player].currentCombos[comboArray[i]])
+            // console.log(gameData[player].currentCombos[comboArray[i]])
             increaseWins(gameData[player])
-            console.log(gameData[player].wins)
-            resetGame()
-            win = true
+            // console.log(gameData[player].wins)
+            return true
         }
-        
     }
-    //call resetGame
-    // GameData player1: createPlayer(“player1”, “token” etc.)
-    checkForDraw(win)
 }
-
 //A function that detects when a game is a draw (no one has won)
-function checkForDraw(win){
-    if ((gameData.player1.squares.length + gameData.player2.squares.length) === 9 && win === false) {
-        updateDrawMessage()
-        resetGame()
+function checkForDraw(){
+    if ((gameData.player1.squares.length + gameData.player2.squares.length) === 9) {
+       return true
     }
 }
 
@@ -164,25 +185,36 @@ function alternateRounds() {
 
 // A function that resets the game board’s data to begin a new game
 function resetGame(){
+    // console.log("this is the reset game")
     gameData.player1.currentCombos = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0, H: 0 };
     gameData.player2.currentCombos = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0, H: 0 };
     gameData.player1.squares = []
     gameData.player2.squares = []
-    setTimeout(alternateRounds, 1000)
     clearGameBoard()
+    alternateRounds()
+    updateTurnMessage()
+    // disableSquare(event)
+    
 }
 
-function updateDrawMessage(){
-    gameState.innerHTML = "It's a Draw!"
-}
 
 function clearGameBoard(){
+    // console.log("this is clearing before for loop")
     for(var i = 0; i < boxes.length; i++){
         boxes[i].innerHTML = ""
+        // console.log("this is clearing after for loop")
     }
 }
-
-
+function disableSquare(event){
+    event.target.classList.add("disabled")
+}
+function enableSquare(){
+    for(var i = 0; i < boxes.length; i++){
+        console.log("for loop enabling")
+        boxes[i].classList.remove("disabled")
+    }
+    
+}
 
 //A function that keeps track of the data for the game board
 // function trackGameboard(){
