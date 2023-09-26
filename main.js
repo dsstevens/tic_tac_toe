@@ -102,12 +102,9 @@ function playSquare(squareIdString, player){
 }
 
 function updateSquareDOM(event,token) {
-    event.target.innerHTML += token
-    event.target.classList.add("disabled")
-/*could also do a conditional to not have to worry about flipping the disabled property afterward:
-//if (!event.target.innerHTML) {
-    event.target.innerHTML += token;
-}*/
+    if (!event.target.innerHTML) {
+        event.target.innerHTML += token;
+    }
 }
 
 function switchPlayer(){
@@ -119,9 +116,10 @@ function switchPlayer(){
     // updateTurnMessage()
 }
 
-// function updateTurnMessage(){
-
-// }
+function updateWinMessage() {
+    console.log("this is the banner win message")
+    gameState.innerHTML = `${currentPlayer.token} Wins!`;
+}
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
 function increaseWins(player){
     return player.wins += 1
@@ -138,6 +136,7 @@ function checkForWin(player){
             // console.log(gameData[player].wins)
             win = true
             updateWins(gameData[player])
+            updateWinMessage()
             resetGame()
         }
     }
