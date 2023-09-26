@@ -15,17 +15,16 @@ gameBoard.addEventListener("click",function(event){
         disableSquare(event)
         // console.log("this is the currentPlayer.id", currentPlayer.id)
         if (checkForWin(currentPlayer.id)){
-            console.log("this is the win conditional")
             updateWins(currentPlayer)
             updateWinMessage()
             switchPlayer()
-            setTimeout(resetGame(), 1000)
+            setTimeout(resetGame, 1000)
             enableSquare()
         } else if (checkForDraw()){
             updateDrawMessage()
             disableSquare(event)
             switchPlayer()
-            setTimeout(resetGame(), 1000)
+            setTimeout(resetGame, 1000)
             enableSquare()
         } else {
             switchPlayer()
@@ -143,7 +142,7 @@ function updateWinMessage() {
 
 function updateDrawMessage(){
     gameState.innerHTML = "It's a Draw!"
-    setTimeout(updateTurnMessage, 2000)
+    setTimeout(updateTurnMessage, 1000)
 }
 
 function updateWins(player){
@@ -166,7 +165,7 @@ function checkForWin(player){
         if(gameData[player].currentCombos[comboArray[i]] > 2){
             // console.log(gameData[player].currentCombos[comboArray[i]])
             increaseWins(gameData[player])
-            // console.log(gameData[player].wins)
+            console.log(gameData[player].wins)
             return true
         }
     }
@@ -193,7 +192,6 @@ function resetGame(){
     clearGameBoard()
     alternateRounds()
     updateTurnMessage()
-    // disableSquare(event)
     
 }
 
