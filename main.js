@@ -18,13 +18,13 @@ gameBoard.addEventListener("click",function(event){
             updateWins(currentPlayer)
             updateWinMessage()
             switchPlayer()
-            setTimeout(resetGame, 2000)
+            setTimeout(resetGame, 1000)
             enableSquare()
         } else if (checkForDraw()){
             updateDrawMessage()
             disableSquare(event)
             switchPlayer()
-            setTimeout(resetGame, 2000)
+            setTimeout(resetGame, 1000)
             enableSquare()
         } else {
             switchPlayer()
@@ -142,7 +142,7 @@ function updateWinMessage() {
 
 function updateDrawMessage(){
     gameState.innerHTML = "It's a Draw!"
-    setTimeout(updateTurnMessage, 3000)
+    setTimeout(updateTurnMessage, 1000)
 }
 
 function updateWins(player){
