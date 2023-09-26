@@ -15,7 +15,7 @@ gameBoard.addEventListener("click",function(event){
         // console.log("this is the currentPlayer.id", currentPlayer.id)
         checkForWin(currentPlayer.id)
         switchPlayer()
-        // updateTurnMessage()
+        updateTurnMessage(`It's ${currentPlayer.token}'s Turn!`)
     }
 })
 
@@ -86,16 +86,12 @@ function createPlayer(id, token, boolean, numWins, squares){
     }
     return player
 }
-function showGamePlay(){
-    currentPlayer = gameData['player1']
-    gameState.innerHTML = `It's ${gameData.player1.token}'s Turn!`
-}
 
 function playSquare(squareIdString, player){
     gameData[player].squares.push(squareIdString)
     idArray = squareIdString.split("")
     for (var i = 0; i < idArray.length; i++){
-       gameData[player].currentCombos[idArray[i]] += 1
+        gameData[player].currentCombos[idArray[i]] += 1
     } //access the player 1 and player 2 nested data within the objects
     console.log(currentPlayer)
     //commented out the event listener, need to figure out how to get player 1 to go first, now going with player2, if it's in the event listener, the wins aren't accurate
@@ -113,17 +109,30 @@ function switchPlayer(){
     } else {
         currentPlayer = gameData['player1']
     }
-    
 }
 
-function updateTurnMessage(){
-    console.log("this is the turn message")
+function showGamePlay(){
+    currentPlayer = gameData['player1']
     gameState.innerHTML = `It's ${gameData.player1.token}'s Turn!`
 }
+
+function updateTurnMessage(message) {
+    gameState.innerHTML = message;
+}
+
 function updateWinMessage() {
     console.log("this is the banner win message")
     gameState.innerHTML = `${currentPlayer.token} Wins!`;
 }
+
+function updateWins(player){
+    if(player === gameData.player1){
+        player1Wins.innerHTML = `SCORE: ${player.wins}`
+    } else {
+        player2Wins.innerHTML = `SCORE: ${player.wins}`
+    }  
+}
+
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
 function increaseWins(player){
     return player.wins += 1
@@ -146,14 +155,6 @@ function checkForWin(player){
     }
     checkForDraw(win)
 }
-function updateWins(player){
-    if(player === gameData.player1){
-        player1Wins.innerHTML = `SCORE: ${player.wins}`
-    } else {
-        player2Wins.innerHTML = `SCORE: ${player.wins}`
-    }
-    
-}
 //A function that detects when a game is a draw (no one has won)
 function checkForDraw(win){
     if ((gameData.player1.squares.length + gameData.player2.squares.length) === 9 && win === false) {
@@ -174,7 +175,7 @@ function resetGame(){
     gameData.player2.currentCombos = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0, H: 0 };
     gameData.player1.squares = []
     gameData.player2.squares = []
-    setTimeout(alternateRounds, 1000)
+    setTimeout(alternateRounds, 4000)
     clearGameBoard()
 }
 
