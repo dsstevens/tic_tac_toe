@@ -3,6 +3,7 @@ var player1Wins = document.querySelector("#player1Wins")
 var gameState = document.querySelector(".game-state")
 var gameBoard = document.querySelector(".gameboard")
 var player2Wins = document.querySelector(".player2Wins")
+var boxes = document.querySelectorAll(".box")
 
 //Event Listeners
 window.addEventListener("load", showGamePlay)
@@ -152,6 +153,7 @@ function checkForWin(player){
 function checkForDraw(win){
     if ((gameData.player1.squares.length + gameData.player2.squares.length) === 9 && win === false) {
         updateDrawMessage()
+        resetGame()
     }
 }
 
@@ -167,12 +169,18 @@ function resetGame(){
     gameData.player1.squares = []
     gameData.player2.squares = []
     setTimeout(alternateRounds, 1000)
+    clearGameBoard()
 }
 
 function updateDrawMessage(){
     gameState.innerHTML = "It's a Draw!"
 }
 
+function clearGameBoard(){
+    for(var i = 0; i < boxes.length; i++){
+        boxes[i].innerHTML = ""
+    }
+}
 
 
 
