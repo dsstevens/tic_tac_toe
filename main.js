@@ -150,12 +150,9 @@ function checkForWin(player){
 
 //A function that detects when a game is a draw (no one has won)
 function checkForDraw(win){
-    //count the array of squares for each player to total 9 if length of arrays === 9 && checkfor win = false then draw
-    console.log("this is a draw")
     if ((gameData.player1.squares.length + gameData.player2.squares.length) === 9 && win === false) {
-        console.log("this is the second draw")
+        updateDrawMessage()
     }
-    //dom function for innerhtml
 }
 
 function alternateRounds() {
@@ -170,8 +167,15 @@ function resetGame(){
     gameData.player1.squares = []
     gameData.player2.squares = []
     setTimeout(alternateRounds, 1000)
-    //reset the turn of the round with a new function ---> alternateRounds() 
 }
+
+function updateDrawMessage(){
+    gameState.innerHTML = "It's a Draw!"
+}
+
+
+
+
 //A function that keeps track of the data for the game board
 // function trackGameboard(){
     //which squares are empty, which have been clicked and have an icon on it
