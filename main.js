@@ -2,7 +2,7 @@
 var player1Wins = document.querySelector("#player1Wins")
 var gameState = document.querySelector(".game-state")
 var gameBoard = document.querySelector(".gameboard")
-var player2Wins = document.querySelector(".player2Wins")
+var player2Wins = document.querySelector("#player2Wins")
 var boxes = document.querySelectorAll(".box")
 
 //Event Listeners
@@ -12,7 +12,7 @@ gameBoard.addEventListener("click",function(event){
      if(event.target.classList.contains('box')) {
         playSquare(event.target.id, currentPlayer.id)
         updateSquareDOM(event, currentPlayer.token)
-        console.log("this is the currentPlayer.id", currentPlayer.id)
+        // console.log("this is the currentPlayer.id", currentPlayer.id)
         checkForWin(currentPlayer.id)
         switchPlayer()
         
@@ -116,39 +116,41 @@ function switchPlayer(){
     } else {
         currentPlayer = gameData['player1']
     }
-
-    // how to change the current turn property to reflect the turn vs default t/f?
-    // how to change the innerHTML to reflect the current player's turn?
-    // we have this function already within the load event listener: showGamePlay: could invoke it again or repetitive?
+    // updateTurnMessage()
 }
 
+// function updateTurnMessage(){
+
+// }
 //A function called increaseWins - increases the count of a player’s wins (should work for either player)
 function increaseWins(player){
     return player.wins += 1
 }
 
 //A function that checks the game board data for win conditions
-function checkForWin(player){
-    //iterate over object w Object.keys(playerWinCombos)
-    //if (newArray[i] === 3) {there was a win, add in to player one object to update dm and dom}
-    
+function checkForWin(player){  
     var comboArray = Object.keys(gameData[player].currentCombos)
     var win = false
     for (var i = 0; i < comboArray.length; i++){
         if(gameData[player].currentCombos[comboArray[i]] > 2){
-            console.log(gameData[player].currentCombos[comboArray[i]])
+            // console.log(gameData[player].currentCombos[comboArray[i]])
             increaseWins(gameData[player])
-            console.log(gameData[player].wins)
-            resetGame()
+            // console.log(gameData[player].wins)
             win = true
+            updateWins(gameData[player])
+            resetGame()
         }
-        
     }
-    //call resetGame
-    // GameData player1: createPlayer(“player1”, “token” etc.)
     checkForDraw(win)
 }
-
+function updateWins(player){
+    if(player === gameData.player1){
+        player1Wins.innerHTML = `SCORE: ${player.wins}`
+    } else {
+        player2Wins.innerHTML = `SCORE: ${player.wins}`
+    }
+    
+}
 //A function that detects when a game is a draw (no one has won)
 function checkForDraw(win){
     if ((gameData.player1.squares.length + gameData.player2.squares.length) === 9 && win === false) {
@@ -164,6 +166,7 @@ function alternateRounds() {
 
 // A function that resets the game board’s data to begin a new game
 function resetGame(){
+    console.log("this is the reset game")
     gameData.player1.currentCombos = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0, H: 0 };
     gameData.player2.currentCombos = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0, H: 0 };
     gameData.player1.squares = []
@@ -177,8 +180,10 @@ function updateDrawMessage(){
 }
 
 function clearGameBoard(){
+    console.log("this is clearing before for loop")
     for(var i = 0; i < boxes.length; i++){
         boxes[i].innerHTML = ""
+        console.log("this is clearing after for loop")
     }
 }
 
