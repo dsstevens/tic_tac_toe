@@ -18,10 +18,12 @@ gameBoard.addEventListener("click",function(event){
             //disable squares
             updateWins(currentPlayer)
             updateWinMessage()
+            switchPlayer()
             setTimeout(resetGame, 1000)
         } else if (checkForDraw()){
             updateDrawMessage()
             //disable squares
+            switchPlayer()
             setTimeout(resetGame, 1000)
         } else {
             switchPlayer()
@@ -201,7 +203,7 @@ function clearGameBoard(){
     }
 }
 function disableSquares(){
-    
+
 }
 
 
