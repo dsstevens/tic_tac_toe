@@ -1,4 +1,4 @@
-body{
+body {
     font-family: 'Hubballi', sans-serif;
     margin: 0%;
     padding: 0%;
@@ -15,7 +15,7 @@ h2 {
     font-size: 4em;
 }
 
-h3{
+h3 {
     color: #1B2478;
     font-size: 3em;
 }
@@ -78,11 +78,11 @@ header {
 }
 
 .box:nth-child(3n) {
-    border-right: none;
+    border-right: 0;
 }
 
 .box:nth-child(6) ~ .box {
-    border-bottom: none;
+    border-bottom: 0;
 }
 
 .player-2-aside {
