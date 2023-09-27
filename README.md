@@ -9,14 +9,15 @@ This is the classic game of tic-tac-toe that we all know and love but designed w
 
 ### Preview of App:  
 
-![Tic-Tac-Toe](https://jmp.sh/s/339d8MIROPZPjz4oErnQ)
+![tic_tac_toe](https://github.com/dsstevens/tic_tac_toe/assets/132790719/b2872604-4941-41f4-abbe-388b87a4b2da)
+
 
 ### Context:  
 
 Final solo project for mod 1 done in a week. It took me over 40 hours to complete as a mod 1 student. 
 
 ### Contributors:  
-Application built entirely by ![Deanna Sofia Stevens](https://github.com/dsstevens)
+Application built entirely by [Deanna Sofia Stevens](https://github.com/dsstevens)
 
 ### Learning Goals:
 
